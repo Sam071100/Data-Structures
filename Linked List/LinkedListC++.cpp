@@ -1,0 +1,47 @@
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node *next;
+};
+
+int main()
+{
+    int A[]={3,5,7,10,15};
+
+    Node *head = new Node;
+
+    Node *temp;
+    Node *last;
+
+    head->data=A[0];
+    head->next=nullptr;
+    last=head;
+
+    // Creating the Linked List
+    for (int i = 1; i < sizeof(A)/sizeof(A[0]); i++)
+    {
+        // Creating a temporary node;
+        temp = new Node;
+
+        //Populating the temporary node
+        temp->data=A[i];
+        temp->next=nullptr;
+
+        //Last's next is pointing to temp
+        last->next=temp;
+        last=temp;
+    }
+    // Displaying the Linked List
+    Node *p=head;
+    while (p!=nullptr)
+    {
+        cout <<p->data<<" "<<flush;
+        p = p->next;
+    }
+    
+    return 0;
+}
