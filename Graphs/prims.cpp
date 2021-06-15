@@ -2,17 +2,16 @@
 using namespace std;
 #define I INT_MAX
 
-int cost[][8] = {{I, I, I, I, I, I, I, I}, {I, I, 25, I, I, I, 15, I}, {I, 25, I, 12, I, I, I, 10}, {I, I, 12, I, 8, I, I, I}, {I, I, I, 8, I, 16, I, 14}, {I, I, I, I, 16, I, 20, 18}, {I, 5, I, I, I, 20, I, I}, {I, I, 10, I, 14, 18, I, I}};
+int cost[8][8] = {{I, I, I, I, I, I, I, I}, {I, I, 25, I, I, I, 5, I}, {I, 25, I, 12, I, I, I, 10}, {I, I, 12, I, 8, I, I, I}, {I, I, I, 8, I, 16, I, 14}, {I, I, I, I, 16, I, 20, 18}, {I, 5, I, I, I, 20, I, I}, {I, I, 10, I, 14, 18, I, I}};
 int near[8] = {I, I, I, I, I, I, I, I}; // finds nearer connected vertices
 int t[2][6];                            // Stores the min spanning tree
 
 int main()
 {
     int i, j, k, u, v, n = 7, min = I;
-
     // Intial Steps
 
-    for (i = 0; i <= n; i++)
+    for (i = 1; i <= n; i++)
     {
         for (j = i; j <= n; j++)
         {
@@ -48,15 +47,15 @@ int main()
 
     // Repeating Steps
 
-    for (i = 1; i < n - 1; i++)
+    for (i = 1; i < n - 1; i++) // Spanning the MST
     {
         min = I;
         for (j = 1; j <= n; j++)
         {
-            if ((near[i] != 0) && (cost[j][near[j]] < min))
+            if ((near[j] != 0) && (cost[j][near[j]] < min))
             {
-                k = j;
                 min = cost[j][near[j]];
+                k = j;
             }
         }
         t[0][i] = k;
@@ -65,7 +64,7 @@ int main()
 
         for (j = 1; j <= n; j++)
         {
-            if ((near[i] != 0) && (cost[j][k] < cost[j][near[j]]))
+            if ((near[j] != 0) && (cost[j][k] < cost[j][near[j]]))
             {
                 near[j] = k;
             }
