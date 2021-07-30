@@ -1,39 +1,32 @@
+// Dfs Traversal of the directed graph without storing the value of the vertex
+
 #include <bits/stdc++.h>
 using namespace std;
 #define fatafat ios_base::sync_with_stdio(false); cin.tie(NULL);cout.tie(NULL);
 #define pb push_back
 
 vector<bool> v; // visited array
-vector<vector<int>> g; // adjacency list
+vector<vector<int>> g; // adjacency list --> can be treated as Array of LinkedList
 
-// Directed graph
 void edge(int a, int b)
 {
     g[a].pb(b);
 }
 
-void bfs(int i)
+void dfs(int u)
 {
-    queue<int> q;
-    int u;
-    cout <<i<<" ";
-    v[i]= true;
-    q.push(i);
-
-    while (!q.empty())
+    if (!v[u])
     {
-        u = q.front();
-        q.pop();
+        cout <<u<<" ";
+        v[u] = true;
 
-       for (auto i = g[u].begin(); i != g[u].end(); i++)
-       {
-           if (!v[*i])
-           {
-               cout <<*i<<" ";
-               v[*i]=true;
-               q.push(*i);
-           }
-       }
+        for (auto it = g[u].begin(); it != g[u].end(); it++)
+        {
+            if (!v[*it])
+            {
+                dfs(*it);
+            }
+        }
     }
 }
 
@@ -64,7 +57,7 @@ int main()
        {
            if (!v[i])
            {
-               bfs(i);
+               dfs(i);
            }
        }
     }

@@ -1,30 +1,45 @@
+// Bfs Traversal of the directed graph having value stored in the vertex
+
 #include <bits/stdc++.h>
 using namespace std;
 #define fatafat ios_base::sync_with_stdio(false); cin.tie(NULL);cout.tie(NULL);
 #define pb push_back
 
 vector<bool> v; // visited array
-vector<vector<int>> g; // adjacency list --> can be treated as Array of LinkedList
+vector<vector<int>> g; // adjacency list
+unordered_map<int, int>value; // Stores the value of the vertex
 
+// Directed graph
 void edge(int a, int b)
 {
     g[a].pb(b);
+
+    // if undirected graph then --->
+    //g[b].pb(a);
 }
 
-void dfs(int u)
+void bfs(int i)
 {
-    if (!v[u])
-    {
-        cout <<u<<" ";
-        v[u] = true;
+    queue<int> q;
+    int u;
+    cout <<value[i]<<" ";
+    v[i]= true;
+    q.push(i);
 
-        for (auto it = g[u].begin(); it != g[u].end(); it++)
-        {
-            if (!v[*it])
-            {
-                dfs(*it);
-            }
-        }
+    while (!q.empty())
+    {
+        u = q.front();
+        q.pop();
+
+       for (auto i = g[u].begin(); i != g[u].end(); i++)
+       {
+           if (!v[*i])
+           {
+               cout <<value[*i]<<" "; // Printing the value of that node
+               v[*i]=true;
+               q.push(*i);
+           }
+       }
     }
 }
 
@@ -48,14 +63,19 @@ int main()
        for (int i = 0; i < e; i++)
        {
            cin >>a>>b;
+           int val1, val2;
+           cin >>val1>>val2;
+           value[a] = val1;
+           value[b] = val2;
            edge(a,b);
        }
        
+       cout <<"Prints the value of the node in the order they are traversed\n";
        for (int i = 1; i <= n; i++)
        {
            if (!v[i])
            {
-               dfs(i);
+               bfs(i);
            }
        }
     }
