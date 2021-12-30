@@ -5,60 +5,61 @@ using namespace std;
 
 class Node
 {
-    public:
-      Node *lchild;
-      int data;
-      Node *rchild;
+public:
+    Node *lchild;
+    int data;
+    Node *rchild;
 };
 
 class Tree
 {
-    private:
-      Node *root;
-    public:
-      Tree();
-      ~Tree();
-      void createTree();
-      void preOrder(Node *p);
-      void preOrder() // Function overloading
-      {
-          preOrder(root);
-      }
-      void inOrder()
-      {
-          inOrder(root);
-      }
-      void postOrder()
-      {
-          postOrder(root);
-      }
-      void postOrder(Node *p);
-      void inOrder(Node *root);
-      void LevelOrder()
-      {
-          LevelOrder(root);
-      }
-      void LevelOrder(Node *p);
-      int Height(Node *p);
-      int Height()
-      {
-          return Height(root);
-      }
-      void IpostOrder()
-      {
-          IpostOrder(root);
-      }
-      void IpostOrder(Node *p);
-      void IpreOrder(Node *p);
-      void IpreOrder()
-      {
-          IpreOrder(root);
-      }
-      void IinOrder(Node *p);
-      void IinOrder()
-      {
-          IinOrder(root);
-      }
+private:
+    Node *root;
+
+public:
+    Tree();
+    ~Tree();
+    void createTree();
+    void preOrder(Node *p);
+    void preOrder() // Function overloading
+    {
+        preOrder(root);
+    }
+    void inOrder()
+    {
+        inOrder(root);
+    }
+    void postOrder()
+    {
+        postOrder(root);
+    }
+    void postOrder(Node *p);
+    void inOrder(Node *root);
+    void LevelOrder()
+    {
+        LevelOrder(root);
+    }
+    void LevelOrder(Node *p);
+    int Height(Node *p);
+    int Height()
+    {
+        return Height(root);
+    }
+    void IpostOrder()
+    {
+        IpostOrder(root);
+    }
+    void IpostOrder(Node *p);
+    void IpreOrder(Node *p);
+    void IpreOrder()
+    {
+        IpreOrder(root);
+    }
+    void IinOrder(Node *p);
+    void IinOrder()
+    {
+        IinOrder(root);
+    }
 };
 
 Tree::Tree()
@@ -75,38 +76,38 @@ void Tree::createTree()
 {
     Node *p, *t;
     int x;
-    queue<Node* >q; // This Queue will store the pointers of the Node as lchild and rchild.
-    cout <<"Enter the root value\n";
-    cin >>x;
+    queue<Node *> q; // This Queue will store the pointers of the Node as lchild and rchild.
+    cout << "Enter the root value\n";
+    cin >> x;
     root = new Node;
-    root->data=x;
-    root->lchild=root->rchild=NULL;
-    q.emplace(root); //enqueue
+    root->data = x;
+    root->lchild = root->rchild = NULL;
+    q.emplace(root); // enqueue
 
     while (!q.empty())
     {
         p = q.front();
         q.pop();
 
-        cout <<"Enter left child data of "<<p->data<<endl;
-        cin >>x;
-        if (x!=-1)
+        cout << "Enter left child data of " << p->data << endl;
+        cin >> x;
+        if (x != -1)
         {
             t = new Node;
             t->data = x;
-            t->lchild=t->rchild=nullptr;
-            p->lchild=t;
+            t->lchild = t->rchild = nullptr;
+            p->lchild = t;
             q.emplace(t);
         }
-        
-        cout <<"Enter right child data of "<<p->data<<endl;
-        cin >>x;
-        if (x!=-1)
+
+        cout << "Enter right child data of " << p->data << endl;
+        cin >> x;
+        if (x != -1)
         {
             t = new Node;
-            t->data=x;
-            t->lchild=t->rchild=nullptr;
-            p->rchild=t;
+            t->data = x;
+            t->lchild = t->rchild = nullptr;
+            p->rchild = t;
             q.emplace(t);
         }
     }
@@ -116,7 +117,7 @@ void Tree::preOrder(Node *p)
 {
     if (p)
     {
-        cout <<p->data<<" ";
+        cout << p->data << " ";
         preOrder(p->lchild);
         preOrder(p->rchild);
     }
@@ -127,28 +128,30 @@ void Tree::inOrder(Node *p)
     if (p)
     {
         inOrder(p->lchild);
-        cout <<p->data<<" ";
+        cout << p->data << " ";
         inOrder(p->rchild);
     }
 }
 
-void Tree::postOrder(Node *p) {
-    if (p){
+void Tree::postOrder(Node *p)
+{
+    if (p)
+    {
         postOrder(p->lchild);
         postOrder(p->rchild);
-        cout << p->data <<" ";
+        cout << p->data << " ";
     }
 }
 
 void Tree::IpostOrder(Node *p)
 {
-    stack<long int>st;
-    cout <<"Using the Iterative Method Post Order: ";
+    stack<long int> st;
+    cout << "Using the Iterative Method Post Order: ";
     long int temp;
 
-    while (p!=nullptr || !st.empty())
+    while (p != nullptr || !st.empty())
     {
-        if (p!=nullptr)
+        if (p != nullptr)
         {
             st.emplace((long int)p);
             p = p->lchild;
@@ -157,25 +160,25 @@ void Tree::IpostOrder(Node *p)
         {
             temp = st.top();
             st.pop();
-            if (temp > 0)    
+            if (temp > 0)
             {
                 st.emplace(-temp);
-                p = ((Node*)temp)->rchild;
+                p = ((Node *)temp)->rchild;
             }
             else
             {
-                cout <<((Node*)(-1*temp))->data<<" ";
+                cout << ((Node *)(-1 * temp))->data << " ";
                 p = nullptr;
             }
         }
     }
-    cout <<endl;
+    cout << endl;
 }
 
 void Tree::LevelOrder(Node *p)
 {
-    queue<Node *>q;
-    cout <<root->data<<" ";
+    queue<Node *> q;
+    cout << root->data << " ";
     q.emplace(root);
 
     while (!q.empty())
@@ -185,12 +188,12 @@ void Tree::LevelOrder(Node *p)
 
         if (p->lchild)
         {
-            cout <<p->lchild->data<<" ";
+            cout << p->lchild->data << " ";
             q.emplace(p->lchild);
         }
         if (p->rchild)
         {
-            cout <<p->rchild->data<<" ";
+            cout << p->rchild->data << " ";
             q.emplace(p->rchild);
         }
     }
@@ -198,14 +201,14 @@ void Tree::LevelOrder(Node *p)
 
 void Tree::IpreOrder(Node *p)
 {
-    stack<Node *>st;
-    cout <<"Using the Iterative Method Preorder: ";
+    stack<Node *> st;
+    cout << "Using the Iterative Method Preorder: ";
 
     while (p || !st.empty())
     {
         if (p)
         {
-            cout <<p->data<<" ";
+            cout << p->data << " ";
             st.emplace(p);
             p = p->lchild;
         }
@@ -216,13 +219,13 @@ void Tree::IpreOrder(Node *p)
             p = p->rchild;
         }
     }
-    cout <<endl;
+    cout << endl;
 }
 
 void Tree::IinOrder(Node *p)
 {
-    stack<Node *>st;
-    cout <<"Using the Iterative Method Indorder: ";
+    stack<Node *> st;
+    cout << "Using the Iterative Method Indorder: ";
 
     while (p || !st.empty())
     {
@@ -235,16 +238,16 @@ void Tree::IinOrder(Node *p)
         {
             p = st.top();
             st.pop();
-            cout <<p->data<<" ";
+            cout << p->data << " ";
             p = p->rchild;
         }
     }
-    cout <<endl;
+    cout << endl;
 }
 int Tree::Height(Node *p)
 {
-    int l =0;
-    int r =0;
+    int l = 0;
+    int r = 0;
     if (p == NULL)
     {
         return 0;
@@ -254,13 +257,12 @@ int Tree::Height(Node *p)
 
     if (l > r)
     {
-        return l+1;
+        return l + 1;
     }
     else
     {
-        return r+1;
+        return r + 1;
     }
-    
 }
 
 int main()
@@ -268,30 +270,30 @@ int main()
     Tree bt;
 
     bt.createTree();
-    cout <<endl;
+    cout << endl;
 
-    cout <<"Preorder : ";
+    cout << "Preorder : ";
     bt.preOrder();
-    cout <<endl;
+    cout << endl;
 
-    cout <<"Inorder : ";
+    cout << "Inorder : ";
     bt.inOrder();
-    cout <<endl;
+    cout << endl;
 
-    cout <<"Postorder : ";
+    cout << "Postorder : ";
     bt.postOrder();
-    cout <<endl;
-    
+    cout << endl;
+
     bt.IpreOrder();
     bt.IinOrder();
     bt.IpostOrder();
 
-    cout <<"Levelorder : ";
+    cout << "Levelorder : ";
     bt.LevelOrder();
-    cout <<endl;
+    cout << endl;
 
-    cout <<"Height of the Tree : ";
-    cout <<bt.Height()<<endl;
+    cout << "Height of the Tree : ";
+    cout << bt.Height() << endl;
 
     return 0;
 }
