@@ -95,6 +95,7 @@ int Height(struct Node *p)
 
 struct Node* InPre(struct Node *p)
 {
+    // getting the rightmost node of the left sub tree
     while (p && p->rchild !=NULL)
     {
         p = p->rchild;
@@ -104,7 +105,7 @@ struct Node* InPre(struct Node *p)
 
 struct Node* InSucc(struct Node *p)
 {
-    // getting the rightmost node of the left sub tree
+    // getting the leftmost node of the right sub tree
     while (p && p->lchild !=NULL)
     {
         p = p->lchild;
