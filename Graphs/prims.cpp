@@ -6,6 +6,14 @@ int cost[8][8] = {{I, I, I, I, I, I, I, I}, {I, I, 25, I, I, I, 5, I}, {I, 25, I
 int near[8] = {I, I, I, I, I, I, I, I}; // finds nearer connected vertices
 int t[2][6];                            // Stores the min spanning tree
 
+// There can be many MST for a graph if the cost of the edegs are same as then we have the choice to choose the vertices so as to avoid the cycle.
+
+// Prims and Kruskals dono greedy method hai but prims is used to find the MST of single connected component and the time taken is O(v-1 x e).
+// Prims works by selecting the min cost edge from the given edges and then it repeats the steps by selecting the min cost edge from the already selected vertices.
+//The above step is followed To avoid formation of cycle as MST is a tree and no cycles are allowed. 
+// If there is disconnected component then prims algo cannot find the MST for the other component whereas Kruskals algo can find the MST for the other connected components too.
+// Prims algo cannot be improved by using min heap as we are selecting the min cost edge originating from the already selected vertices and go on repeating this step until we select v-1 edges out of e edges.
+
 int main()
 {
     int i, j, k, u, v, n = 7, min = I;

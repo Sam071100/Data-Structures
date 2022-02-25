@@ -59,7 +59,7 @@ void findSCCs()
     reverse();
     // :: Quick Fix
     // Please check it afterward
-    // memset(visited, false, V);
+    // memset(visited, false, V); --> Only works for the -1, 0
 
     for (int i = 0; i < V; i++)
     {
