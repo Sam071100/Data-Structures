@@ -4,6 +4,18 @@ using namespace std;
 
 int set[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
 
+// Kruskals and prims both are greedy algorithm for finding the Minimum spanning tree of the graph.
+// Kruskals works by selecting the min cost edge among all the edges and cycle is avoided by using the disjoint set union method.
+// So the time complexity of this algo is O(v-1 x e) as we are selecting v-1 edges out of e edges.
+// This can be further improved by using min heap as in every iteration we are selecting the min cost edge among all the edges.
+// So if we use min heap to find the next min cost edge then the time complexity can be reduced to O(v-1 * log e)
+// While selecting the min cost edge we use the concept of weighted union and collapsing find to detect the formation of cycle and avoid the selection of that particular edge.
+// In prim’s algorithm, graph must be a connected graph while the Kruskal’s can function on disconnected graphs too and can find the MST for that respective graph.
+// The main difference between Prims and Kruskals is of time complexity that is 
+// IN prims algo -->It traverses one node more than one time to get the minimum distance. IN kruskal algo --->	It traverses one node only once.
+// Prim’s algorithm runs faster in dense graphs.     Kruskal’s algorithm runs faster in sparse graphs.
+// Prim’s algorithm uses List Data Structure.	Kruskal’s algorithm uses Heap Data Structure.
+
 void myunion(int u, int v)
 {
     if (set[u] < set[v])
